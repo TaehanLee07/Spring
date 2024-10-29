@@ -64,3 +64,8 @@ Select e.ename, d.loc, e.job
 from emp e JOIN dept d
 USING (deptno)
 where e.job = 'ANALYST';
+
+-- NATURAL JOIN
+Select e.ename, d.loc, e.job
+From emp e Natural JOIN dept d
+where e.job = 'ANALYST';
