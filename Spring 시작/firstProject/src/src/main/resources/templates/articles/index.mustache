@@ -1,0 +1,28 @@
+{{>layouts/header}}
+
+<table class="table">
+    <!-- 제목이 들어가는 부분에 thead 태그 -->
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <!-- 콘텐츠가 들어가는 부분은 tbody -->
+    <!-- Entity를 받아올 때는 변수 앞에 #을 붙여서 받아온다. -->
+    {{#articleList}}
+        <!-- List 안에 요소 모두가 List로 보내기만 해도 되서 신기. -->
+    <tbody>
+    <tr>
+        <th>{{id}}</th>
+        <td><a href="/articles/{{id}}">{{title}}</a></td>
+        <td>{{content}}</td>
+    </tr>
+    {{/articleList}}
+</tbody>
+</table>
+
+<a href="/articles/new">New Article</a>
+
+{{>layouts/footer}}
