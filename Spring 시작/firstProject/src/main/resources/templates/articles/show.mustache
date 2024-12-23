@@ -1,0 +1,29 @@
+{{>layouts/header}}
+
+<table class="table">
+    <!-- 제목이 들어가는 부분에 thead 태그 -->
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <!-- 콘텐츠가 들어가는 부분은 tbody -->
+    <!-- Entity를 받아올 때는 변수 앞에 #을 붙여서 받아온다. -->
+    {{#article}}
+    <tbody>
+    <tr>
+        <th>{{id}}</th>
+        <td>{{title}}</td>
+        <td>{{content}}</td>
+    </tr>
+    {{/article}}
+</tbody>
+</table>
+
+<a href="/articles/{{article.id}}/edit" class="btn btn-primary">edit</a>
+<a href="/articles/{{article.id}}/delete" class="btn btn-danger">delete</a>
+<a href="/articles">Go to Article List</a>
+
+{{>layouts/footer}}
