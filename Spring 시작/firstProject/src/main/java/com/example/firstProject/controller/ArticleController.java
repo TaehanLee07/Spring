@@ -1,8 +1,10 @@
 package com.example.firstProject.controller;
 
+import com.example.firstProject.dto.CommentDto;
 import com.example.firstProject.entity.Article;
 import com.example.firstProject.dto.ArticleForm;
 import com.example.firstProject.repository.ArticleRepository;
+import com.example.firstProject.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ public class ArticleController {
 
     @Autowired // 스프링부트가 미리 생성해놓은 객체를 가져다가 자동으로 연결!
     private ArticleRepository articleRepository;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/articles/new")
     public String newArticleForm()
@@ -53,11 +57,13 @@ public class ArticleController {
 
         // 1. id로 데이터를 가져옴.
         Article articleEntity = articleRepository.findById(id).orElse(null);
+        List<CommentDto> commentDtos = commentService.comments(id);
         // id를 가져오는데 없을 경우를 예외처리 하지 않으면 오류가 뜨기에 예외처리를 하라고 오류를 띄움
         // Optional<Article> articleEntity = articleRepository.findById(id);
 
         // 2. 가져온 데이터를 모델에 등록함.
         model.addAttribute("article", articleEntity);
+        model.addAttribute("commentDtos", commentDtos);
 
         // 3. 보여줄 페이지를 설정!
         return "articles/show";
